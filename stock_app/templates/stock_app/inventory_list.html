@@ -23,9 +23,9 @@
     <!-- Inventory Detail -->
     {% elif view == 'detail' %}
         <h1>{{ inventory.name }}</h1>
-        <p><strong>Description:</strong> {{ inventory.description }}</p>
-        <p><strong>Quantity:</strong> {{ inventory.quantity }}</p>
+        <p><strong>Id_number:</strong> {{ inventory.id_number }}</p>
         <p><strong>Price:</strong> ${{ inventory.price }}</p>
+        <p><strong>Quantity:</strong> {{ inventory.quantity }}</p>
         <a href="{% url 'edit_inventory' inventory.pk %}">Edit</a>
         <a href="{% url 'delete_inventory' inventory.pk %}">Delete</a>
         <a href="{% url 'inventory_list' %}">Back to Inventory List</a>
