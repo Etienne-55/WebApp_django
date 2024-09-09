@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  service-front:
+    build:
+      context: .
+      dockerfile: front-end/vue-project/dockerfile
+    container_name: vue-app
+    ports:
+      - "8080:8080"
+    networks:
+      - app_network
+
+  service-back:
+    build:
+      context: .
+      dockerfile: back-end\Dockerfile
+    container_name: django_app_container
+    ports:
+      - "8000:8000"
+    networks:
+      - app_network
+
+networks:
+  app_network:
+    driver: bridge

@@ -1,0 +1,7 @@
+{
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "django": "cd ../your-django-project && python manage.py runserver",
+    "start": "concurrently \"npm run serve\" \"npm run django\""
+  }
+}
