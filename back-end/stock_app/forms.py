@@ -1,7 +1,7 @@
 from django import forms
-from .models import computer_hardware
+from .models import Coffee 
 
-class computer_hardware_form(forms.ModelForm):
+class cofee_form(forms.ModelForm):
     class Meta:
-        model = computer_hardware
-        fields = ('name', 'id_number', 'price', 'quantity')
+        model = Coffee 
+        fields = ('name', 'origin', 'roast')

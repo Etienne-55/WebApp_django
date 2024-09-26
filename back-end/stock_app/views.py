@@ -6,6 +6,9 @@ from django.http import JsonResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login as auth_login
 import json
+from rest_framework import viewsets
+from .models import Coffee
+from .serializers import CoffeeSerializer
 
 
 @csrf_exempt
@@ -64,3 +67,7 @@ class HelloWorld(APIView):
 class Hello(APIView):
     def get(self, request):
         return Response({"message": "Hell0"}, status=status.HTTP_200_OK)
+
+class CoffeeViewSet(viewsets.ModelViewSet):
+    queryset = Coffee.objects.all()
+    serializer_class = CoffeeSerializer
