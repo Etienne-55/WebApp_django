@@ -2,15 +2,28 @@
     <div>
       <h1>{{ hello }}</h1><br><br>
       
-      <button @click="goToMenu">Return to menu</button>
+      <button @click="goToMenu">Return to login</button>
+      <h1>Coffees</h1>
+    <ul>
+      <li v-for="coffee in coffees" :key="coffee.id">
+        {{ coffee.name }} - {{ coffee.origin }} - {{ coffee.roast }}
+        <button @click="editCoffee(coffee.id)">Edit</button>
+        <button @click="deleteCoffee(coffee.id)">Delete</button>
+      </li>
+    </ul>
+    <router-link to="/coffee/new">Add Coffee</router-link>
     </div>
   </template>
   
   <script>
+
+  import axios from 'axios';
+
   export default {
     data() {
       return {
         hello: '',     
+        coffees: [],
       };
     },
     created() {
@@ -35,8 +48,25 @@
       goToMenu() {
         this.$router.push('/');
       },
+      fetchCoffees() {
+      axios.get('/api/coffee/')
+        .then(response => { this.coffees = response.data; })
+        .catch(error => { console.error(error); });
+    },
+    deleteCoffee(id) {
+      axios.delete(`/api/coffee/${id}/`)
+        .then(() => { this.fetchCoffees(); })
+        .catch(error => { console.error(error); });
+    },
+    editCoffee(id) {
+      this.$router.push(`/coffee/${id}/edit`);
     }
-  };
+  },
+  mounted() {
+    this.fetchCoffees();
+  }
+};
+
   </script>
   
   <style scoped>
